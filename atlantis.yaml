@@ -1,21 +1,6 @@
-version: 3
 projects:
-- name: atlantis_test
+- name: myproject
   dir: .
-  workflow: custom
-  autoplan:
+  autoplan: 
     enabled: true
     when_modified: ["*.tf", "*.tfvars"]
-
-workflows:
-  custom:
-    plan:
-      steps:
-      - run: terraform fmt -check
-      - run: terraform init
-      - run: terraform validate
-      - init
-      - plan
-    apply:
-      steps:
-      - apply
