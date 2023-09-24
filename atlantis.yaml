@@ -1,5 +1,32 @@
+# atlantis.yaml
+
 version: 3
+
+automerge:
+  enable: true
+  policy: "allow"
+  require_approval: true
+
 projects:
-- dir: ../atlantis_test
-  autoplan:
-    when_modified: ["../modules/**/*.tf", "*.tf*", ".terraform.lock.hcl"]
+  - name: "atlantis_test"
+    dir: "atlantis_test"
+    workspace: "default"
+    autoplan:
+      when_modified: true
+    apply_requirements:
+      - "approved"
+      - "mergeable"
+
+    workflow:
+      - name: "format_check"    # 代码格式检查步骤
+        plan:
+          steps:
+            - run: terraform fmt -check
+
+      - name: "policy_check"    # 策略检查步骤
+        plan:
+          steps:
+            - run: tflint --deep
+
+      - plan
+      - apply
