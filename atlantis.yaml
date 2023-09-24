@@ -8,14 +8,14 @@ automerge:
   require_approval: true
 
 projects:
-  - name: "atlantis_test"
-    dir: "atlantis_test"
-    workspace: "default"
+  - name: "my-project"
+    dir: "path/to/my-project"
+    workspace: "production"
     autoplan:
       when_modified: true
     apply_requirements:
-      - "approved"
-      - "mergeable"
+      - approved
+      - mergeable
 
     workflow:
       - name: "format_check"    # 代码格式检查步骤
