@@ -3,7 +3,7 @@ automerge: true
 delete_source_branch_on_merge: true
 
 projects:
-- name: dev
+- name: Prod
   dir: .
   autoplan: 
     enabled: true
